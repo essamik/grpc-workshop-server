@@ -12,19 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """The Python implementation of the GRPC helloworld.Greeter server."""
+import logging
 import statistics
 from concurrent import futures
-import logging
 from datetime import date, datetime
-
-import grpc
 
 from employee_pb2 import *
 from employee_pb2_grpc import *
 
 
 class EmployeeService(EmployeeStubServicer):
-
     employees = []
     ages = []
 
@@ -56,6 +53,7 @@ class EmployeeService(EmployeeStubServicer):
             birthday = datetime.strptime(employee.birthday, '%Y-%m-%d')
             age = int(today.year - birthday.year)
             self.ages.append(age)
+
 
 def serve():
     port = '5000'
